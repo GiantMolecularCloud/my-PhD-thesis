@@ -1,0 +1,668 @@
+% ****************************************************************************************************
+% classicthesis-config.tex
+% formerly known as loadpackages.sty, classicthesis-ldpkg.sty, and classicthesis-preamble.sty
+% Use it at the beginning of your ClassicThesis.tex, or as a LaTeX Preamble
+% in your ClassicThesis.{tex,lyx} with \input{classicthesis-config}
+% ****************************************************************************************************
+% If you like the classicthesis, then I would appreciate a postcard.
+% My address can be found in the file ClassicThesis.pdf. A collection
+% of the postcards I received so far is available online at
+% http://postcards.miede.de
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 0. Set the encoding of your files. UTF-8 is the only sensible encoding nowadays. If you can't read
+% äöüßáéçèê∂åëæƒÏ€ then change the encoding setting in your editor, not the line below. If your editor
+% does not support utf8 use another editor!
+% ****************************************************************************************************
+\PassOptionsToPackage{utf8}{inputenc}
+  \usepackage{inputenc}
+
+\PassOptionsToPackage{T1}{fontenc} % T2A for cyrillics
+  \usepackage{fontenc}
+
+% if xcolor with the option dvipsnames is not loaded before classicthesis, parameter clashes will occur that break the document!
+\usepackage[dvipsnames]{xcolor}
+
+% ****************************************************************************************************
+% 1. Configure classicthesis for your needs here, e.g., remove "drafting" below
+% in order to deactivate the time-stamp on the pages
+% (see ClassicThesis.pdf for more information):
+% ****************************************************************************************************
+\PassOptionsToPackage{
+  drafting=false,   % print version information on the bottom of the pages
+  tocaligned=false, % the left column of the toc will be aligned (no indentation)
+  dottedtoc=true,   % page numbers in ToC flushed right
+  eulerchapternumbers=true, % use AMS Euler for chapter font (otherwise Palatino)
+  linedheaders=false,       % chaper headers will have line above and beneath
+  floatperchapter=true,     % numbering per chapter for all floats (i.e., Figure 1.1)
+  eulermath=false,  % use awesome Euler fonts for mathematical formulae (only with pdfLaTeX)
+  beramono=true,    % toggle a nice monospaced font (w/ bold)
+  palatino=true,    % deactivate standard font for loading another one, see the last section at the end of this file for suggestions
+  style=classicthesis, % classicthesis, arsclassica
+  parts=true,
+  linedheaders=true
+}{classicthesis}
+
+
+% ****************************************************************************************************
+% 2. Personal data and user ad-hoc commands (insert your own data here)
+% ****************************************************************************************************
+\newcommand{\myTitle}{Zooming into the Blast Furnace\xspace}
+\newcommand{\mySubtitle}{A close Look into the Molecular Gas in the \ngc253 Starburst with ALMA\xspace}
+\newcommand{\myDegree}{PhD Astronomy\xspace}
+\newcommand{\myName}{Nico Krieger\xspace}
+\newcommand{\mySupervisor}{Dr. Fabian Walter\xspace}
+\newcommand{\myAdviserOne}{Prof. Dr. Hans-Walter Rix\xspace}
+\newcommand{\myAdviserTwo}{Prof. Dr. Ralf Klessen\xspace}
+\newcommand{\myExaminerOne}{Prof. Dr. Eva Grebel\xspace}
+\newcommand{\myExaminerTwo}{Prof. Dr. Bj\"orn-Malte Sch\"afer\xspace}
+\newcommand{\myFaculty}{Heidelberg Graduate School for Physics\xspace}
+\newcommand{\myDepartment}{Max Planck Institute for Astronomy\xspace}
+\newcommand{\myUni}{University Heidelberg\xspace}
+\newcommand{\myLocation}{Heidelberg\xspace}
+\newcommand{\myTime}{May 2020\xspace}
+\newcommand{\myBirthplace}{Birth Town\xspace}
+\newcommand{\myOraldate}{28 May 2020\xspace}
+\newcommand{\myVersion}{development draft}
+
+% ********************************************************************
+% Setup, finetuning, and useful commands
+% ********************************************************************
+\providecommand{\mLyX}{L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+\newcommand{\ie}{i.\,e.}
+\newcommand{\Ie}{I.\,e.}
+\newcommand{\eg}{e.\,g.}
+\newcommand{\Eg}{E.\,g.}
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 3. Loading some handy packages
+% ****************************************************************************************************
+
+% ********************************************************************
+% Packages with options that might require adjustments
+% ********************************************************************
+\PassOptionsToPackage{ngerman,american}{babel} % change this to your language(s), main language last
+% Spanish languages need extra options in order to work with this template
+%\PassOptionsToPackage{spanish,es-lcroman}{babel}
+    \usepackage{babel}
+
+\usepackage{csquotes}
+\PassOptionsToPackage{%
+  backend=biber,bibencoding=utf8,
+  language=auto,%
+  style=authoryear-comp, % Author 1999, 2010
+  date=year,             % remove month from bibliography
+  sorting=nyt,
+  giveninits=true,       % only initials, not full first names
+  minbibnames=3,
+  maxbibnames=5,
+  maxcitenames=2,
+  mincitenames=1,
+  uniquename = false,    % do not use first name when last names are not unique
+  uniquelist=false,      % same but for the bibliography
+  backref=false,
+  natbib=true            % natbib compatibility mode (\citep and \citet still work)
+}{biblatex}
+    \usepackage{biblatex}
+\AtEveryBibitem{\clearfield{title}}
+
+\PassOptionsToPackage{fleqn}{amsmath}       % math environments and more by the AMS
+  \usepackage{amsmath}
+\usepackage{amssymb}
+
+% ********************************************************************
+% General useful packages
+% ********************************************************************
+
+\usepackage{geometry}
+\usepackage{graphicx} %
+\usepackage{scrhack} % fix warnings when using KOMA with listings package
+\usepackage{xspace} % to get the spacing after macros right
+\PassOptionsToPackage{printonlyused,smaller}{acronym}
+  \usepackage{acronym} % nice macros for handling all acronyms in the thesis
+  %\renewcommand{\bflabel}[1]{{#1}\hfill} % fix the list of acronyms --> no longer working
+  %\renewcommand*{\acsfont}[1]{\textsc{#1}}
+  %\renewcommand*{\aclabelfont}[1]{\acsfont{#1}}
+  %\def\bflabel#1{{#1\hfill}}
+  \def\bflabel#1{{\acsfont{#1}\hfill}}
+  \def\aclabelfont#1{\acsfont{#1}}
+\usepackage{tocloft}
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{enumitem}
+\usepackage{afterpage}
+\usepackage[pages=some]{background}
+\usepackage[percent]{overpic}
+
+% ignore unnecessary titlesec warnings
+\usepackage{silence}
+\WarningFilter{titlesec}{Non standard sectioning command}
+\WarningFilter{biblatex}{Package option 'sortcites' enabled.}
+
+  
+% ****************************************************************************************************
+%\usepackage{pgfplots} % External TikZ/PGF support (thanks to Andreas Nautsch)
+%\usetikzlibrary{external}
+%\tikzexternalize[mode=list and make, prefix=ext-tikz/]
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 4. Setup floats: tables, (sub)figures, and captions
+% ****************************************************************************************************
+
+\usepackage{tabularx} % better tables
+  \setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{l}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+
+\usepackage[bf]{caption}
+\captionsetup[table]{position=above}
+\captionsetup[table]{skip=10pt}
+\captionsetup{format=plain}
+\captionsetup{justification=justified, %raggedright,
+              singlelinecheck=off}
+\addtokomafont{caption}{\raggedright}
+% \setlength{\abovecaptionskip}{10pt}     % default: 10pt
+% \setlength{\belowcaptionskip}{10pt}     % default: 0pt
+
+\usepackage{subfig}
+% \usepackage{subcaption}
+
+\usepackage[referable]{threeparttablex}
+% documentation: http://ftp.fau.de/ctan/macros/latex/contrib/threeparttable/threeparttable.pdf
+
+% use as:
+% \begin{table}
+%   \centering
+%   \begin{threeparttable}
+%     \caption{Parameters \label{table:params}}
+%     \begin{tabular}{lrlll}
+%       \toprule
+%       Parameter & Symbol & Value & 1- $\sigma$ Error & Units\\
+%       \midrule
+%       Observable x & $x$ & 0.21 & $\pm$ 0.04\tnotex{tn:footnote} & \\
+%       \\
+%       \\
+%       \multicolumn{5}{c}{\emph{Some other parameters}} \\
+%       \\
+%       Observable y & $y$ & 5.7 & $\pm$ 0.08 & units\\
+%       \bottomrule
+%     \end{tabular}
+%     \begin{tablenotes}
+%       \item[a]\label{tn:footnote} Some footnote
+%       \note{Table comments here.}
+%     \end{tablenotes}
+%   \end{threeparttable}
+% \end{table}
+
+% \usepackage[section,above,below]{placeins}  % provide FloatBarrier
+                                            % prevent floating across sections
+
+
+% ****************************************************************************************************
+
+
+% ****************************************************************************************************
+% 5. Setup code listings
+% ****************************************************************************************************
+\usepackage{listings}
+%\lstset{emph={trueIndex,root},emphstyle=\color{BlueViolet}}%\underbar} % for special keywords
+\lstset{language=[LaTeX]Tex,%C++,
+  morekeywords={PassOptionsToPackage,selectlanguage},
+  keywordstyle=\color{RoyalBlue},%\bfseries,
+  basicstyle=\small\ttfamily,
+  %identifierstyle=\color{NavyBlue},
+  commentstyle=\color{Green}\ttfamily,
+  stringstyle=\rmfamily,
+  numbers=none,%left,%
+  numberstyle=\scriptsize,%\tiny
+  stepnumber=5,
+  numbersep=8pt,
+  showstringspaces=false,
+  breaklines=true,
+  %frameround=ftff,
+  %frame=single,
+  belowcaptionskip=.75\baselineskip
+  %frame=L
+}
+% ****************************************************************************************************
+
+
+
+
+% ****************************************************************************************************
+% 6. Last calls before the bar closes
+% ****************************************************************************************************
+% ********************************************************************
+% Her Majesty herself
+% ********************************************************************
+\usepackage{classicthesis}
+
+
+% ********************************************************************
+% Fine-tune hyperreferences (hyperref should be called last)
+% ********************************************************************
+\definecolor{CThighlight}{named}{Maroon}
+\hypersetup{%
+  colorlinks=true, linktocpage=true, pdfstartpage=3, pdfstartview=FitV,%
+  breaklinks=true, pageanchor=true,%
+  pdfpagemode=UseNone, %
+  plainpages=false, bookmarksnumbered, bookmarksopen=true, bookmarksopenlevel=1,%
+  hypertexnames=true, pdfhighlight=/O,%nesting=true,%frenchlinks,%
+%   urlcolor=CTurl, linkcolor=CTlink, citecolor=CTcitation, %pagecolor=RoyalBlue,%
+  urlcolor=CThighlight, linkcolor=CThighlight, citecolor=CThighlight, %pagecolor=RoyalBlue,%
+  pdftitle={\myTitle},%
+  pdfauthor={\textcopyright\ \myName, \myUni, \myFaculty},%
+  pdfsubject={},%
+  pdfkeywords={},%
+  pdfcreator={pdfLaTeX},%
+  pdfproducer={LaTeX with hyperref and classicthesis}%
+}
+
+
+% ********************************************************************
+% Setup autoreferences (hyperref and babel)
+% ********************************************************************
+% There are some issues regarding autorefnames
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=latexwords
+% you have to redefine the macros for the
+% language you use, e.g., american, ngerman
+% (as chosen when loading babel/AtBeginDocument)
+% ********************************************************************
+\makeatletter
+\@ifpackageloaded{babel}%
+  {%
+    \addto\extrasamerican{%
+      \renewcommand*{\figureautorefname}{Figure}%
+      \renewcommand*{\tableautorefname}{Table}%
+      \renewcommand*{\partautorefname}{Part}%
+      \renewcommand*{\chapterautorefname}{Chapter}%
+      \renewcommand*{\sectionautorefname}{Section}%
+      \renewcommand*{\subsectionautorefname}{Section}%
+      \renewcommand*{\subsubsectionautorefname}{Section}%
+    }%
+    \addto\extrasngerman{%
+      \renewcommand*{\paragraphautorefname}{Absatz}%
+      \renewcommand*{\subparagraphautorefname}{Unterabsatz}%
+      \renewcommand*{\footnoteautorefname}{Fu\"snote}%
+      \renewcommand*{\FancyVerbLineautorefname}{Zeile}%
+      \renewcommand*{\theoremautorefname}{Theorem}%
+      \renewcommand*{\appendixautorefname}{Anhang}%
+      \renewcommand*{\equationautorefname}{Gleichung}%
+      \renewcommand*{\itemautorefname}{Punkt}%
+    }%
+      % Fix to getting autorefs for subfigures right (thanks to Belinda Vogt for changing the definition)
+      \providecommand{\subfigureautorefname}{\figureautorefname}%
+    }{\relax}
+\makeatother
+
+
+% ********************************************************************
+% Development Stuff
+% ********************************************************************
+\listfiles
+%\PassOptionsToPackage{l2tabu,orthodox,abort}{nag}
+%  \usepackage{nag}
+%\PassOptionsToPackage{warning, all}{onlyamsmath}
+%  \usepackage{onlyamsmath}
+
+
+% ****************************************************************************************************
+% 7. Further adjustments (experimental)
+% ****************************************************************************************************
+
+\setlength\parindent{0pt}
+
+% ********************************************************************
+% Changing the text area
+% ********************************************************************
+
+\areaset[current]{440pt}{800pt}     %400pt,770pt
+\setlength{\marginparwidth}{10pt}   %5em
+\setlength{\marginparsep}{2pt}      %2em
+\setlength{\voffset}{20pt}          %20pt
+% \setlength{\hoffset}{5pt}
+% \setlength{\oddsidemargin}{15pt}    % makes page asymmetric even when both are given
+% \setlength{\evensidemargin}{15pt}   % makes page asymmetric even when both are given
+\setlength{\footskip}{32pt}         %20pt
+
+
+% ********************************************************************
+% Using different fonts
+% ********************************************************************
+
+%\usepackage[oldstylenums]{kpfonts} % oldstyle notextcomp
+%\usepackage[osf]{libertine}
+%\usepackage[light,condensed,math]{iwona}
+%\renewcommand{\sfdefault}{iwona}
+%\usepackage{lmodern} % <-- no osf support :-(
+%\usepackage{cfr-lm} %
+%\usepackage[urw-garamond]{mathdesign} <-- no osf support :-(
+%\usepackage[default,osfigures]{opensans} % scale=0.95
+%\usepackage[sfdefault]{FiraSans}
+%\usepackage[opticals,mathlf]{MinionPro} % onlytext
+
+% ********************************************************************
+%\usepackage[largesc,osf]{newpxtext}
+%\linespread{1.05} % a bit more for Palatino
+% Used to fix these:
+% https://bitbucket.org/amiede/classicthesis/issues/139/italics-in-pallatino-capitals-chapter
+% https://bitbucket.org/amiede/classicthesis/issues/45/problema-testatine-su-classicthesis-style
+
+
+% ****************************************************************************************************
+% 8. Own definitions, abbreviations, ...
+% ****************************************************************************************************
+
+\newcommand{\ngc}[3]{NGC#1#2#3}
+
+\newcommand{\rsigma}{R -- $\sigma$ \xspace}
+\newcommand{\sigmaten}{\ensuremath{\sigma_\mathrm{10\,pc}}\xspace}
+\newcommand{\mten}{\ensuremath{m_\mathrm{10\,pc}}\xspace}
+\newcommand{\Lten}{\ensuremath{L_\mathrm{10\,pc}}\xspace}
+\newcommand{\avir}{\ensuremath{\alpha_\mathrm{vir}}\xspace}
+
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{\textit{TODO: #1}}}}
+
+\newcommand{\Leroy}[1]{\IfEqCase{#1}{
+        {p}{\citepalias{2018ApJ...869..126L}\xspace}
+        {t}{\citetalias{2018ApJ...869..126L}\xspace}
+    }[\PackageError{leroy}{Undefined option to Leroy: #1}{}]
+}
+
+
+% ********************************************************************
+% Units
+% ********************************************************************
+
+\newcommand{\mujy}{\ensuremath{\mu}Jy\xspace}
+\newcommand{\kms}{km\,s$^{-1}$\xspace}
+\newcommand{\jybeam}{Jy\,beam$^{-1}$\xspace}
+\newcommand{\Kkms}{K\,km\,s$^{-1}$\xspace}
+\newcommand{\Kkmspc}{K\,km\,s$^{-1}$\,pc$^2$\xspace}
+\newcommand{\sqcm}{cm$^{-2}$\xspace}
+\newcommand{\ergs}{erg\,s$^{-1}$\xspace}
+\newcommand{\Msun}{M$_\odot$\xspace}
+\newcommand{\Msunyr}{M$_\odot$\,yr$^{-1}$\xspace}
+\newcommand{\Msunkms}{M$_\odot$\,km\,s$^{-1}$\xspace}
+\newcommand{\arcsec}{\ensuremath{^{\prime\prime}}\xspace}
+\newcommand{\arcmin}{\ensuremath{^{\prime}}\xspace}
+\newcommand{\mum}{$\mu$m\xspace}
+\newcommand{\pcm}[1]{cm$^{-#1}$}
+\newcommand{\pyr}{yr$^{-1}$}
+
+
+% ********************************************************************
+% Molecules
+% ********************************************************************
+
+\newcommand{\hi}{H\textsc{i}\xspace}
+\newcommand{\hii}{H\textsc{ii}\xspace}
+\newcommand{\htwo}{H$_2$\xspace}
+\newcommand{\Halpha}{H$\alpha$\xspace}
+\newcommand{\co}[2]{CO(#1--#2)\xspace}
+\newcommand{\isoco}[2]{$^{13}$CO(#1--#2)\xspace}
+\newcommand{\cisoo}[2]{C$^{18}$O(#1--#2)\xspace}
+\newcommand{\hcn}{HCN(4-3)\xspace}
+\newcommand{\hco}{HCO$^+$(4-3)\xspace}
+\newcommand{\cs}{CS(7-6)\xspace}
+
+
+% ********************************************************************
+% Software
+% ********************************************************************
+
+\newcommand{\casa}{\textsc{casa}\xspace}
+\newcommand{\clean}{\textsc{clean}\xspace}
+\newcommand{\xclass}{\textsc{xclass}\xspace}
+\newcommand{\astrodendro}{\textsc{astrodendro}\xspace}
+
+
+% ********************************************************************
+% Formatting
+% ********************************************************************
+
+\newenvironment{papernote}
+{
+    \itshape
+}{}
+
+\newenvironment{paperabstract}
+{
+  \par\vspace{\baselineskip}%
+  \begin{center}
+      \textsc{Abstract}
+  \end{center}
+%   \vspace{-2em}
+  \par
+%   \vspace{\baselineskip}
+}{}
+
+\newenvironment{paperauthors}
+{
+  \begin{center}
+    % author names
+  \end{center}
+  \par\vspace{\baselineskip}%
+  \begin{itshape}
+    % author locations
+  \end{itshape}
+}{}
+
+\newcommand{\keywords}[1]{\par\vspace{\baselineskip} \textit{Keywords:} #1 \par\vspace{\baselineskip}}
+\newcommand{\publication}[3]{
+    #1\\
+    \quad \textit{#2}\\
+    \quad #3
+    \vspace{0.4\baselineskip}
+}
+
+\newcommand{\tablenote}[1]{
+    \small
+    \vspace{0.5em}
+    \textbf{Note:} #1
+}
+\newcommand{\tablenonote}[1]{
+    \small
+    \vspace{0.5em}
+    #1
+}
+
+
+\newcommand{\tablereference}[1]{
+    \textbf{References:} #1
+}
+
+% math symbols are too large, shrink them
+\newcommand*{\GTRSIM}{\smallrel\gtrsim}
+\newcommand*{\LESSSIM}{\smallrel\lesssim}
+\newcommand*{\GTR}{\smallrel >}
+\newcommand*{\LESS}{\smallrel <}
+
+\makeatletter
+\newcommand*{\smallrel}[2][.8]{%
+  \mathrel{\mathpalette{\smallrel@{#1}}{#2}}%
+}
+\newcommand*{\smallrel@}[3]{%
+  % #1: scale factor
+  % #2: math style
+  % #3: symbol
+  \sbox0{$#2\vcenter{}$}%
+  \dimen@=\ht0 %
+  \raise\dimen@\hbox{%
+    \scalebox{#1}{%
+      \raise-\dimen@\hbox{$#2#3\m@th$}%
+    }%
+  }%
+}
+\makeatother
+
+
+
+% ********************************************************************
+% Chapter Tabs
+% ********************************************************************
+
+% adapted from here:
+% https://tex.stackexchange.com/questions/318025/fancy-side-chapter-thumb-headings
+
+\usepackage{tikz}
+\usepackage{lipsum}
+\usepackage{fourier}
+\usepackage{xpatch}
+\usepackage{changepage}     % provide odd/even page checking
+\strictpagecheck
+\usepackage{ifthen}
+
+\renewcommand\chaptermarkformat{}
+% define a new mark for the chapter number
+\newmarks\chapternum
+\xapptocmd\chaptermark{\marks\chapternum{\thechapter}}{}{\PatchFailed}
+
+\newlength\outermarginwidth
+\setlength\outermarginwidth{1.5cm}
+
+\colorlet{outermarginbgcolor}{lightgray}
+\colorlet{outermarginfgcolor}{darkgray}
+
+
+\newboolean{DoFlip}
+\newcommand\BeginFlip{
+  \setboolean{DoFlip}{true}
+}
+\newcommand\EndFlip{
+  \setboolean{DoFlip}{false}
+}
+
+\makeatletter
+\newcommand\outermarginmark{
+  \ifodd\value{page}\hfill\else\hspace*{\dimexpr\outermarginwidth*3/8\relax}\fi
+  \rotatebox{90}{\parbox{\layerheight}{%
+    \raggedleft
+    \usekomafont{outermargin}{%
+      \MakeMarkcase{\ifodd\value{page}\odd@outermargin\else\even@outermargin\fi}}%
+  }}%
+  \ifodd\value{page}\hspace*{\dimexpr\outermarginwidth*3/8\relax}\fi%
+}
+\newcommand*\even@outermargin{}
+\newcommand*\odd@outermargin{}
+\newcommand*\evenoutermargin[1]{\renewcommand\even@outermargin{#1}}
+\newcommand*\oddoutermargin[1]{\renewcommand\odd@outermargin{#1}}
+\makeatother
+
+\newkomafont{outermargin}{%
+%   \normalfont\normalcolor
+  \LARGE\bfseries
+  \color{outermargintextcolor}%
+}
+
+\newcommand\outermarginflip{%
+\ifthenelse{\boolean{DoFlip}}{%
+  \includegraphics[width=\outermarginwidth]{images/flipbook/flip_\thepage.pdf}
+}{}
+}
+
+% declare new page style using layers
+\DeclareNewPageStyleByLayers{scth}{%
+  scth.outermargin.bg.even,%
+  scth.outermargin.bg.odd,%
+  scth.outermargin.text.even,%
+  scth.outermargin.text.odd,%
+  scth.outermargin.flip.even,%
+  scth.outermargin.flip.odd%
+}
+
+% define the layers for even pages
+
+% color background box
+\DeclareNewLayer[
+  background,
+  evenpage,
+  outermargin,
+  width=\outermarginwidth,
+%   height=\paperheight,
+  voffset=-\headsep,
+  contents={\color{outermarginbgcolor}\rule{\layerwidth}{\layerheight}}
+]{scth.outermargin.bg.even}
+
+% tab text (chapter name)
+\DeclareNewLayer[
+  foreground,
+  evenpage,
+  head,
+  hoffset=0cm,
+  width=\outermarginwidth,
+  align=t,
+  addvoffset=\dimexpr+\headheight\relax,
+  height=10pt,
+  contents=\chapternumbermark
+]{scth.outermargin.cn.even}
+\DeclareNewLayer[
+  clone=scth.outermargin.cn.even,
+  addheight=\dimexpr\headheight+\headsep+\textheight\relax,
+  contents=\outermarginmark
+]{scth.outermargin.text.even}
+
+% flipbook image
+\DeclareNewLayer[
+  foreground,
+  evenpage,
+  outermargin,
+  width=\outermarginwidth,
+  height=\outermarginwidth,
+  align=lb,
+  voffset=\paperheight,
+  contents=\outermarginflip
+]{scth.outermargin.flip.even}
+\DeclareNewLayer[
+  foreground,
+  oddpage,
+  outermargin,
+  width=\outermarginwidth,
+  height=\outermarginwidth,
+  align=rb,
+  hoffset=\paperwidth,
+  voffset=\paperheight,
+  contents=\outermarginflip
+]{scth.outermargin.flip.odd}
+
+% define the layers for odd page from the settings for even pages
+\newcommand*\DeclareOddFromEven[1]{%
+  \DeclareNewLayer[
+    clone=#1.even,
+    oddpage,
+    align=r,
+    hoffset=\paperwidth
+  ]{#1.odd}%
+}
+\DeclareOddFromEven{scth.outermargin.bg}
+\DeclareOddFromEven{scth.outermargin.text}
+
+% add the layers to page style scrheadings and page style plain
+\ForEachLayerOfPageStyle*{scth}{%
+  \AddLayersToPageStyle{scrheadings}{#1}%
+  \AddLayersToPageStyle{plain.scrheadings}{#1}%
+}
+
+% set the contents of the outer margin on even and odd pages for scrheadings, plain and scth
+\evenoutermargin{\leftmark} % was: some text
+\oddoutermargin{\leftmark}
+
+% define the color of the tabs
+\definecolor{lightblue}{RGB}{199,232,250}
+\definecolor{darkblue}{RGB}{59,134,215}
+\definecolor{lightgrey}{RGB}{192,192,192}
+\definecolor{darkgrey}{RGB}{127,127,127}
+\definecolor{white}{RGB}{255,255,255}
+
+\colorlet{outermarginbgcolor}{lightgrey}
+\colorlet{outermarginfgcolor}{darkgrey}
+\colorlet{outermargintextcolor}{white}
+
+
+% ****************************************************************************************************

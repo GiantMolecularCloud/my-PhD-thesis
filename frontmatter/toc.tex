@@ -1,0 +1,124 @@
+%*******************************************************
+% Table of Contents
+%*******************************************************
+\pagestyle{scrheadings}
+%\phantomsection
+\pdfbookmark[1]{\contentsname}{tableofcontents}
+
+\setcounter{tocdepth}{1}    % <-- 1: sections, 2: subsections
+\setcounter{secnumdepth}{3} % <-- 3 numbers up to subsubsections
+\manualmark
+\markboth{\spacedlowsmallcaps{\contentsname}}{\spacedlowsmallcaps{\contentsname}}
+
+\renewcommand{\cftpartleader}{\cftdotfill{\cftdotsep}} % dots for parts
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % dots for chapters
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}  % dots for sections
+
+\pdfbookmark[1]{Contents}{Contents}
+\markboth{\spacedlowsmallcaps{Contents}}{\spacedlowsmallcaps{Contents}}
+\chapter*{Contents}
+\addcontentsline{toc}{chapter}{\tocEntry{Contents}}
+
+\renewcommand\contentsname{} % the empty name
+\begingroup
+\let\clearpage\relax
+\vspace{-3cm} % the removed space. Set as appropriate
+\tableofcontents
+\endgroup
+
+% \tableofcontents
+
+\automark[section]{chapter}
+\renewcommand{\chaptermark}[1]{\markboth{\spacedlowsmallcaps{#1}}{\spacedlowsmallcaps{#1}}}
+\renewcommand{\sectionmark}[1]{\markright{\textsc{\thesection}\enspace\spacedlowsmallcaps{#1}}}
+
+
+%*******************************************************
+% List of Figures and of the Tables
+%*******************************************************
+
+\clearpage
+% \pagestyle{empty} % Uncomment this line if your lists should not have any headlines with section name and page number
+
+%*******************************************************
+% List of Figures
+%*******************************************************
+
+\begingroup
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    %\phantomsection
+    %\addcontentsline{toc}{chapter}{\listfigurename}
+    \pdfbookmark[1]{\listfigurename}{lof}
+    \pdfbookmark[1]{List of Figures}{List of Figures}
+    \markboth{\spacedlowsmallcaps{List of Figures}}{\spacedlowsmallcaps{List of Figures}}
+    \chapter*{List of Figures}
+    \chaptermark{list of figures}
+    \renewcommand{\listfigurename}{}
+    \begingroup
+    \let\clearpage\relax
+    \vspace{-3cm} % the removed space. Set as appropriate
+    \listoffigures
+    \endgroup
+\endgroup
+
+\clearpage
+
+%*******************************************************
+% List of Tables
+%*******************************************************
+
+\begingroup
+    \let\clearpage\relax
+    \let\cleardoublepage\relax
+    %\phantomsection
+    %\addcontentsline{toc}{chapter}{\listtablename}
+    \pdfbookmark[1]{\listtablename}{lot}
+    \pdfbookmark[1]{List of Tables}{List of Tables}
+    \markboth{\spacedlowsmallcaps{List of Tables}}{\spacedlowsmallcaps{List of Tables}}
+    \chapter*{List of Tables}
+    \chaptermark{list of tables}
+    \renewcommand{\listtablename}{}
+    \begingroup
+    \let\clearpage\relax
+    \vspace{-3cm} % the removed space. Set as appropriate
+    \listoftables
+    \endgroup
+\endgroup
+
+\clearpage
+
+%*******************************************************
+% List of Listings
+%*******************************************************
+
+% \chaptermark{list of listings}
+% \begingroup
+%     \let\clearpage\relax
+%     \let\cleardoublepage\relax
+    % %\phantomsection
+    % %\addcontentsline{toc}{chapter}{\lstlistlistingname}
+    % \pdfbookmark[1]{\lstlistlistingname}{lol}
+    % \lstlistoflistings
+% \endgroup
+
+% \vspace{8ex}
+
+%*******************************************************
+% Acronyms
+%*******************************************************
+
+% \chaptermark{acronyms}
+% \begingroup
+%     \let\clearpage\relax
+%     \let\cleardoublepage\relax
+%     %\phantomsection
+%     \pdfbookmark[1]{Acronyms}{acronyms}
+%     \markboth{\spacedlowsmallcaps{Acronyms}}{\spacedlowsmallcaps{Acronyms}}
+%     \chapter*{Acronyms}
+%     \begin{acronym}[UMLX]
+%         \acro{DRY}{Don't Repeat Yourself}
+%         \acro{API}{Application Programming Interface}
+%         \acro{UML}{Unified Modeling Language}
+%     \end{acronym}
+% \endgroup

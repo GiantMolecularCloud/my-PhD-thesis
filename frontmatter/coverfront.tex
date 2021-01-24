@@ -1,0 +1,41 @@
+%*******************************************************
+% Titlepage
+%*******************************************************
+
+\newgeometry{centering,margin=2cm}
+\thispagestyle{empty}
+\pagecolor{black}\afterpage{\nopagecolor}
+
+\backgroundsetup{
+scale=1,
+color=black,
+opacity=1.0,
+angle=0,
+vshift=-2cm,
+hshift=0.25cm,
+% position={0cm,3cm},
+% anchor=north west,
+contents={%
+%   \includegraphics[width=0.95\paperwidth]{thesis/images/frontmatter/cover.png}
+  \includegraphics[width=0.95\paperwidth]{thesis/images/frontmatter/cover2.pdf}
+  }%
+}
+\BgThispage
+
+\begin{center}
+    \color{white}
+    \vspace{1cm}
+    
+    \resizebox{\linewidth}{!}{\textsc{\myTitle}}
+    
+    \vspace{1.5cm}
+    \resizebox{\linewidth}{!}{\mySubtitle}
+
+    \vfill
+    \Large{A PhD Thesis in Astronomy put forward by \\ \myName}\\
+    \vspace{0.5cm}
+\end{center}
+
+
+\clearpage
+\restoregeometry
